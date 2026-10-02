@@ -1,6 +1,7 @@
 ## Overview
 
 This activity demonstrates how the ESP32 handles analog inputs and outputs using three separate sketches:
+
 Example 3: Reading raw analog inputs via ADC (GPIO 34).  
 Example 4: Generating Pulse Width Modulation (PWM) signals to control LED brightness (GPIO 19).   
 Example 5: Outputting continuous analog DC voltages using the built-in Digital-to-Analog Converter (DAC) (GPIO 25). 
@@ -32,7 +33,7 @@ Example 5: Outputting continuous analog DC voltages using the built-in Digital-t
 
 https://drive.google.com/drive/folders/1gNKI0h15Sqzc4bToilFORrJzx5rDgpfb?usp=sharing
 
-## 🔬 Waveform & Signal Analysis
+## Waveform & Signal Analysis
 
 ### 1. Why is PWM not the same signal as DAC output?
 * **PWM (`GPIO 19`):** A **digital signal** that pulses rapidly between $0\text{V}$ and $3.3\text{V}$. It controls output power by varying how long the signal stays HIGH versus LOW (duty cycle). It only simulates an analog voltage.
@@ -51,13 +52,13 @@ ADC saturation happens when the input voltage hits the hardware limits of the ES
 * **Lower Endpoint Saturation:** Below ~$0.14\text{V}$ ($142\text{ mV}$), internal offset noise causes the ADC to bottom out, registering `0` even if small millivolts are present.
 * **Upper Endpoint Saturation:** Near ~$3.14\text{V}$ and above, the 12-bit register reaches its maximum limit of `4095`, making higher voltages read as the same max value.
 
-## 📈 Comparison of Predicted & Observed Results
+## Comparison of Predicted & Observed Results
 
 1. **Input to Duty Conversion:** Mapping raw $12\text{-bit}$ values ($0\text{--}4095$) to $8\text{-bit}$ duty cycles ($0\text{--}255$) showed dynamic and linear tracking across all potentiometer positions.
 
 2. **DAC Voltage Generation:** The DAC produced steady DC voltages measured on the multimeter[cite: 4]. The minimum value registered at $0.09\text{V}$ due to non-zero DAC offset, while higher code values generated continuous DC levels peaking at $3.19\text{V}$[cite: 4].
 
-## 📝 Conclusion
+## Conclusion
 
 Laboratory Activity 4 successfully demonstrated the key differences between reading analog inputs, generating PWM signals, and outputting true analog DC voltages on the ESP32. By running Examples 3 through 5 separately, we observed how 12-bit ADC readings ($0\text{--}4095$) linearly map to 8-bit PWM duty cycles ($0\text{--}255$). Multimeter testing verified that the DAC output produces a continuous DC voltage ($0.09\text{V}\text{--}3.19\text{V}$)[cite: 4], unlike the PWM signal which rapidly toggles between digital HIGH and LOW states. Furthermore, the activity highlighted ADC endpoint saturation at low ($142\text{ mV}$) and high ($3139\text{ mV}$) voltage ranges due to internal hardware limitations.
   
